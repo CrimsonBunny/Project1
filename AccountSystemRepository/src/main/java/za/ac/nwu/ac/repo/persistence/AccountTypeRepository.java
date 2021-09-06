@@ -10,12 +10,12 @@ import za.ac.nwu.ac.domain.persistence.AccountType;
 public interface AccountTypeRepository extends JpaRepository<AccountType, Long> {
 
     @Query(value = "SELECT " +
-            "       ACCOUNT_TYPE_ID, " +
-            "       ACCOUNT_TYPE_NAME, " +
-            "       CREATION DATE, " +
-            "       MNEMONIC" +
+            "       AccountTypeID, " +
+            "       AccountTypeName, " +
+            "       CreationDate, " +
+            "       Mnemonic" +
             "   FROM " +
-            "       VITRSA_SANDBOX.DEMO_ACCOUNT_TYPE " +
+            "       HR.ACCOUNTTYPE " +
             "   WHERE MNEMONIC = :mnemonic ", nativeQuery = true)
     AccountType getAccountTypeByMnemonicNativeQuery(String mnemonic);
 

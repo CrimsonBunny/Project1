@@ -36,7 +36,7 @@ public class AccountType implements Serializable {
     }
 
     @Id
-    @SequenceGenerator(name = "GenericSequence", sequenceName = "AccountSystemGenericSequence", allocationSize = 1)
+    @SequenceGenerator(name = "GenericSequence", sequenceName = "AS_Sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GenericSequence")
     @Column(name = "AccountTypeID")
     public Long getAccountTypeID() {
@@ -77,6 +77,10 @@ public class AccountType implements Serializable {
     @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType", orphanRemoval = true, cascade = CascadeType.PERSIST)
     public Set<AccountTransaction> getAccountTransactions() {
         return accountTransactions;
+    }
+
+    public void setAccountTransactions(Set<AccountTransaction> accountTransactions) {
+        this.accountTransactions = accountTransactions;
     }
 
     @Override

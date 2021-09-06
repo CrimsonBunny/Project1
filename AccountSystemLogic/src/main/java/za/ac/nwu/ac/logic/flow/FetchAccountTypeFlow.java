@@ -5,5 +5,7 @@ import za.ac.nwu.ac.domain.dto.AccountTypeDto;
 import java.util.List;
 
 public interface FetchAccountTypeFlow {
-    public List<AccountTypeDto> getAllAccountTypes();
+    List<AccountTypeDto> getAllAccountTypes();
+
+    AccountTypeDto getAccountTypeByMnemonic(String mnemonic);
 }

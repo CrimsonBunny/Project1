@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: za.ac.nwu.ac.logic.flow.impl.FetchAccountTypeImplTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.103 s <<< FAILURE! - in za.ac.nwu.ac.logic.flow.impl.FetchAccountTypeImplTest
+methodToTest(za.ac.nwu.ac.logic.flow.impl.FetchAccountTypeImplTest)  Time elapsed: 0.016 s  <<< FAILURE!
+java.lang.AssertionError
+	at za.ac.nwu.ac.logic.flow.impl.FetchAccountTypeImplTest.methodToTest(FetchAccountTypeImplTest.java:25)
+

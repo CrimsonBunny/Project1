@@ -30,5 +30,8 @@ public class FetchAccountTypeImpl implements FetchAccountTypeFlow {
         return accountTypeTranslator.getAccountTypeByMnemonic(mnemonic);
     }
 
+    public boolean methodToTest() {
+        return true;
+    }
 
 }

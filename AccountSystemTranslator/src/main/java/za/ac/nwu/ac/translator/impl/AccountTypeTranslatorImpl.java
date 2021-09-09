@@ -7,6 +7,7 @@ import za.ac.nwu.ac.domain.persistence.AccountType;
 import za.ac.nwu.ac.repo.persistence.AccountTypeRepository;
 import za.ac.nwu.ac.translator.AccountTypeTranslator;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +47,16 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
     }
 
     @Override
+    public AccountTypeDto delete(String mnemonic) {
+        try {
+            accountTypeRepository.deleteAccountTypeDtoByMnemonic(mnemonic);
+            return getAccountTypeDtoByMnemonic(mnemonic);
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to delete from the DB", e);
+        }
+    }
+
+    @Override
     public AccountTypeDto getAccountTypeByMnemonicNativeQuery(String mnemonic) {
         try {
             AccountType accountType = accountTypeRepository.getAccountTypeByMnemonicNativeQuery(mnemonic);
@@ -72,6 +83,11 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
         } catch (Exception e) {
             throw new RuntimeException("Unable to read from the DB", e);
         }
+    }
+
+    @Override
+    public AccountTypeDto update(String mnemonic, String newAccountName, LocalDate newCreationDate) {
+        return null;
     }
 
 

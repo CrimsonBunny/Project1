@@ -27,21 +27,11 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>
-            AccountSystemDomain
-        </module>
-        <module>
-            AccountSystemRepository
-        </module>
-        <module>
-            AccountSystemTranslator
-        </module>
-        <module>
-            AccountSystemLogic
-        </module>
-        <module>
-            AccountSystemWebSpringBoot
-        </module>
+        <module>AccountSystemDomain</module>
+        <module>AccountSystemRepository</module>
+        <module>AccountSystemTranslator</module>
+        <module>AccountSystemLogic</module>
+        <module>AccountSystemWebSpringBoot</module>
     </modules>
 
     <dependencyManagement>

@@ -3,7 +3,9 @@ package za.ac.nwu.ac.translator.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import za.ac.nwu.ac.domain.dto.AccountTransactionDto;
+import za.ac.nwu.ac.domain.dto.AccountTypeDto;
 import za.ac.nwu.ac.domain.persistence.AccountTransaction;
+import za.ac.nwu.ac.domain.persistence.AccountType;
 import za.ac.nwu.ac.repo.persistence.AccountTransactionRepository;
 import za.ac.nwu.ac.translator.AccountTransactionTranslator;
 
@@ -24,6 +26,15 @@ public class AccountTransactionTranslatorImpl implements AccountTransactionTrans
             return new AccountTransactionDto(accountTransaction);
         } catch (Exception e) {
             throw new RuntimeException("unable to save to the DB", e);
+        }
+    }
+
+    @Override
+    public AccountTransactionDto getBalanceByMnemonic(Long memberID, AccountTypeDto accountType) {
+        try {
+            return accountTransactionRepository.getTransactionByMnemonic(memberID, accountType);
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to read from the DB", e);
         }
     }
 }

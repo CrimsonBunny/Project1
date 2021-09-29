@@ -20,8 +20,4 @@ public class FetchAccountTypeImplTest {
         classToTest = null;
     }
 
-    @Test
-    public void methodToTest() {
-        assertTrue(classToTest.methodToTest());
-    }
 }

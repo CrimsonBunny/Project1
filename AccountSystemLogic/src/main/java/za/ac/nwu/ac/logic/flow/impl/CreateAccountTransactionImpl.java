@@ -19,7 +19,16 @@ public class CreateAccountTransactionImpl implements CreateAccountTransactionFlo
     }
 
     @Override
-    public AccountTransactionDto create(AccountTransactionDto accountTransaction) {
+    public AccountTransactionDto add(AccountTransactionDto accountTransaction) {
+        if (null == accountTransaction.getTransactionDate()) {
+            accountTransaction.setTransactionDate(LocalDate.now());
+        }
+
+        return accountTransactionTranslator.create(accountTransaction);
+    }
+
+    @Override
+    public AccountTransactionDto subtract(AccountTransactionDto accountTransaction) {
         if (null == accountTransaction.getTransactionDate()) {
             accountTransaction.setTransactionDate(LocalDate.now());
         }

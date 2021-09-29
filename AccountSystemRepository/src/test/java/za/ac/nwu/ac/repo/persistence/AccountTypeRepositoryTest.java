@@ -31,39 +31,6 @@ public class AccountTypeRepositoryTest {
     }
 
     @Test
-    public void getAccountTypeByMnemonicNativeQueryMiles() {
-        AccountType miles = accountTypeRepository.getAccountTypeByMnemonicNativeQuery("MILES");
-        assertNotNull(miles);
-        assertEquals("MILES", miles.getMnemonic());
-    }
-
-    @Test
-    public void getAccountTypeByMnemonicNativeQuery() {
-        AccountType miles = accountTypeRepository.getAccountTypeByMnemonicNativeQuery("MILESSS");
-        assertNull(miles);
-    }
-
-    @Test
-    public void getAccountTypeByMnemonicMiles() {
-        AccountType miles = accountTypeRepository.getAccountTypeByMnemonic("MILES");
-        assertNotNull(miles);
-        assertEquals("MILES", miles.getMnemonic());
-    }
-
-    @Test
-    public void getAccountTypeByMnemonicPlay() {
-        AccountType miles = accountTypeRepository.getAccountTypeByMnemonic("PLAY");
-        assertNotNull(miles);
-        assertEquals("PLAY", miles.getMnemonic());
-    }
-
-    @Test
-    public void getAccountTypeByMnemonic() {
-        AccountType miles = accountTypeRepository.getAccountTypeByMnemonic("R");
-        assertNull(miles);
-    }
-
-    @Test
     public void getAccountTypeDtoByMnemonicMiles() {
         AccountTypeDto miles = accountTypeRepository.getAccountTypeDtoByMnemonic("MILES");
         assertNotNull(miles);

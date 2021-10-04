@@ -36,9 +36,9 @@ public class AccountTransaction implements Serializable {
     }
 
     @Id
-    @SequenceGenerator(name = "GenericSequence", sequenceName = "AccountSystemGenericSequence", allocationSize = 1)
+    @SequenceGenerator(name = "GenericSequence", sequenceName = "AS_Generic_Sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "GenericSequence")
-    @Column(name = "AccountID")
+    @Column(name = "Transaction_ID")
     public Long getTransaction_ID() {
         return Transaction_ID;
     }
@@ -47,7 +47,7 @@ public class AccountTransaction implements Serializable {
         this.Transaction_ID = accountID;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "AccountTypeID")
     public AccountType getAccountType() {
         return accountType;

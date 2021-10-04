@@ -10,13 +10,10 @@ import za.ac.nwu.ac.domain.persistence.AccountTransaction;
 @Repository
 public interface AccountTransactionRepository extends JpaRepository<AccountTransaction, Long> {
 
-    @Query(value = "SELECT new za.ac.nwu.ac.domain.dto.AccountTransactionDto(" +
-            "       at.accountType," +
-            "       at.memberID," +
-            "       at.amount, " +
-            "       at.transactionDate )" +
+    @Query(value = "SELECT " +
+            "       at" +
             "   FROM " +
             "       AccountTransaction at" +
-            "   WHERE at.memberID = :memberID AND at.accountType = :accountType")
-    AccountTransactionDto getTransactionByMnemonic(Long memberID, AccountTypeDto accountType);
+            "   WHERE at.memberID = :memberID")
+    AccountTransactionDto getTransactionByMnemonic(Long memberID);
 }

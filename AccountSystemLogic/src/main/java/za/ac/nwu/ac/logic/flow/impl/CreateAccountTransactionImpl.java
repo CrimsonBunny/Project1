@@ -19,20 +19,20 @@ public class CreateAccountTransactionImpl implements CreateAccountTransactionFlo
     }
 
     @Override
-    public AccountTransactionDto add(AccountTransactionDto accountTransaction) {
+    public AccountTransactionDto add(AccountTransactionDto accountTransaction, String mnemonic) {
         if (null == accountTransaction.getTransactionDate()) {
             accountTransaction.setTransactionDate(LocalDate.now());
         }
 
-        return accountTransactionTranslator.create(accountTransaction);
+        return accountTransactionTranslator.create(accountTransaction, mnemonic);
     }
 
     @Override
-    public AccountTransactionDto subtract(AccountTransactionDto accountTransaction) {
+    public AccountTransactionDto subtract(AccountTransactionDto accountTransaction, String mnemonic) {
         if (null == accountTransaction.getTransactionDate()) {
             accountTransaction.setTransactionDate(LocalDate.now());
         }
 
-        return accountTransactionTranslator.create(accountTransaction);
+        return accountTransactionTranslator.create(accountTransaction, mnemonic);
     }
 }

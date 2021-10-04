@@ -23,7 +23,6 @@ public class FetchAccountTransactionImpl implements FetchAccountTransactionFlow 
 
     @Override
     public AccountTransactionDto getBalanceByMnemonic(Long memberID, String mnemonic) {
-        AccountTypeDto accountType = accountTypeTranslator.getAccountTypeDtoByMnemonic(mnemonic);
-        return accountTransactionTranslator.getBalanceByMnemonic(memberID, accountType);
+        return accountTransactionTranslator.getBalanceByMnemonic(memberID, mnemonic);
     }
 }

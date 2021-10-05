@@ -18,6 +18,7 @@ public class AccountType implements Serializable {
     private LocalDate creationDate;
 
     private Set<AccountTransaction> accountTransactions;
+    private Set<AccountBalance> accountBalances;
 
     public AccountType(Long accountTypeID, String mnemonic, String accountTypeName, LocalDate creationDate) {
         this.accountTypeID = accountTypeID;
@@ -81,6 +82,15 @@ public class AccountType implements Serializable {
 
     public void setAccountTransactions(Set<AccountTransaction> accountTransactions) {
         this.accountTransactions = accountTransactions;
+    }
+
+    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType", cascade = CascadeType.ALL)
+    public Set<AccountBalance> getAccountBalance() {
+        return accountBalances;
+    }
+
+    public void setAccountBalances(Set<AccountBalance> accountBalances) {
+        this.accountBalances = accountBalances;
     }
 
     @Override

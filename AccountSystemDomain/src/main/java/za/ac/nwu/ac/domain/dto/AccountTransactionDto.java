@@ -3,6 +3,7 @@ package za.ac.nwu.ac.domain.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import za.ac.nwu.ac.domain.persistence.AccountBalance;
 import za.ac.nwu.ac.domain.persistence.AccountTransaction;
 import za.ac.nwu.ac.domain.persistence.AccountType;
 
@@ -32,7 +33,7 @@ public class AccountTransactionDto implements Serializable {
 
     public AccountTransactionDto(AccountTransaction accountTransaction) {
         this.setMnemonic(accountTransaction.getAccountType().getMnemonic());
-        this.setMemberID(accountTransaction.getMemberID());
+        this.setMemberID(accountTransaction.getAccountBalance().getMemberID());
         this.setAmount(accountTransaction.getAmount());
         this.setTransactionDate(accountTransaction.getTransactionDate());
     }
@@ -57,7 +58,7 @@ public class AccountTransactionDto implements Serializable {
             name = "MemberID",
             notes = "Id of the member who owns the account",
             dataType = "java.lang.Long",
-            example = "81264598",
+            example = "1",
             required = true)
     public Long getMemberID() {
         return memberID;
@@ -106,8 +107,8 @@ public class AccountTransactionDto implements Serializable {
     }
 
     @JsonIgnore
-    public AccountTransaction getAccountTransaction(AccountType accountType) {
-        return new AccountTransaction(accountType, getMemberID(), getAmount(), getTransactionDate());
+    public AccountTransaction getAccountTransaction(AccountType accountType, AccountBalance memberID) {
+        return new AccountTransaction(accountType, memberID, getAmount(), getTransactionDate());
     }
 
     @Override

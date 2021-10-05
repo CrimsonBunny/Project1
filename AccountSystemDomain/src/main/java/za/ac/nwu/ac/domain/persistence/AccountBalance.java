@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "AccountBalance")
@@ -11,11 +12,21 @@ public class AccountBalance implements Serializable {
 
     private static final long serialVersionUID = 8304323850814087170L;
 
+    private Long balanceID;
     private Long memberID;
     private AccountType accountType;
     private Long balance;
 
+    private Set<AccountTransaction> accountTransactions;
+
     public AccountBalance() {
+    }
+
+    public AccountBalance(Long balanceID, Long memberID, AccountType accountType, Long balance) {
+        this.balanceID = balanceID;
+        this.memberID = memberID;
+        this.accountType = accountType;
+        this.balance = balance;
     }
 
     public AccountBalance(Long memberID, AccountType accountType, Long balance) {
@@ -24,14 +35,18 @@ public class AccountBalance implements Serializable {
         this.balance = balance;
     }
 
-    public AccountBalance(AccountType accountType, Long balance) {
-        this.accountType = accountType;
-        this.balance = balance;
-    }
-
     @Id
     @SequenceGenerator(name = "Bal_Seq", sequenceName = "AS_Balance_Seq", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AS_Balance_Seq")
+    @Column(name = "BalanceID")
+    public Long getBalanceID() {
+        return balanceID;
+    }
+
+    public void setBalanceID(Long balanceID) {
+        this.balanceID = balanceID;
+    }
+
     @Column(name = "MemberID")
     public Long getMemberID() {
         return memberID;
@@ -60,25 +75,36 @@ public class AccountBalance implements Serializable {
         this.balance = balance;
     }
 
+    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountBalance", cascade = CascadeType.ALL)
+    public Set<AccountTransaction> getAccountTransactions() {
+        return accountTransactions;
+    }
+
+    public void setAccountTransactions(Set<AccountTransaction> accountTransactions) {
+        this.accountTransactions = accountTransactions;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountBalance that = (AccountBalance) o;
-        return Objects.equals(memberID, that.memberID) && Objects.equals(accountType, that.accountType) && Objects.equals(balance, that.balance);
+        return Objects.equals(balanceID, that.balanceID) && Objects.equals(memberID, that.memberID) && Objects.equals(accountType, that.accountType) && Objects.equals(balance, that.balance) && Objects.equals(accountTransactions, that.accountTransactions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(memberID, accountType, balance);
+        return Objects.hash(balanceID, memberID, accountType, balance, accountTransactions);
     }
 
     @Override
     public String toString() {
         return "AccountBalance{" +
-                "memberID=" + memberID +
-                ", accountTypeID=" + accountType +
-                ", amount=" + balance +
+                "balanceID=" + balanceID +
+                ", memberID=" + memberID +
+                ", accountType=" + accountType +
+                ", balance=" + balance +
+                ", accountTransactions=" + accountTransactions +
                 '}';
     }
 }

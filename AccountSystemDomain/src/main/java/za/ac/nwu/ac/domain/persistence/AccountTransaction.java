@@ -13,14 +13,14 @@ public class AccountTransaction implements Serializable {
 
     private Long Transaction_ID;
     private AccountType accountType;
-    private Long memberID;
+    private AccountBalance accountBalance;
     private Long amount;
     private LocalDate transactionDate;
 
-    public AccountTransaction(Long Transaction_ID, AccountType accountType, Long memberID, Long amount, LocalDate transactionDate) {
+    public AccountTransaction(Long Transaction_ID, AccountType accountType, AccountBalance accountBalance, Long amount, LocalDate transactionDate) {
         this.Transaction_ID = Transaction_ID;
         this.accountType = accountType;
-        this.memberID = memberID;
+        this.accountBalance = accountBalance;
         this.amount = amount;
         this.transactionDate = transactionDate;
     }
@@ -28,9 +28,9 @@ public class AccountTransaction implements Serializable {
     public AccountTransaction() {
     }
 
-    public AccountTransaction(AccountType accountType, Long memberID, Long amount, LocalDate transactionDate) {
+    public AccountTransaction(AccountType accountType, AccountBalance accountBalance, Long amount, LocalDate transactionDate) {
         this.accountType = accountType;
-        this.memberID = memberID;
+        this.accountBalance = accountBalance;
         this.amount = amount;
         this.transactionDate = transactionDate;
     }
@@ -57,13 +57,14 @@ public class AccountTransaction implements Serializable {
         this.accountType = accountType;
     }
 
-    @Column(name = "MemberID")
-    public Long getMemberID() {
-        return memberID;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "BalanceID")
+    public AccountBalance getAccountBalance() {
+        return accountBalance;
     }
 
-    public void setMemberID(Long memberID) {
-        this.memberID = memberID;
+    public void setAccountBalance(AccountBalance accountBalance) {
+        this.accountBalance = accountBalance;
     }
 
     @Column(name = "Amount")
@@ -84,25 +85,26 @@ public class AccountTransaction implements Serializable {
         this.transactionDate = transactionDate;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountTransaction that = (AccountTransaction) o;
-        return Objects.equals(Transaction_ID, that.Transaction_ID) && Objects.equals(accountType, that.accountType) && Objects.equals(memberID, that.memberID) && Objects.equals(amount, that.amount) && Objects.equals(transactionDate, that.transactionDate);
+        return Objects.equals(Transaction_ID, that.Transaction_ID) && Objects.equals(accountType, that.accountType) && Objects.equals(accountBalance, that.accountBalance) && Objects.equals(amount, that.amount) && Objects.equals(transactionDate, that.transactionDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(Transaction_ID, accountType, memberID, amount, transactionDate);
+        return Objects.hash(Transaction_ID, accountType, accountBalance, amount, transactionDate);
     }
 
     @Override
     public String toString() {
         return "AccountTransaction{" +
-                "accountID=" + Transaction_ID +
-                ", accountTypeID='" + accountType + '\'' +
-                ", memberID='" + memberID + '\'' +
+                "Transaction_ID=" + Transaction_ID +
+                ", accountType=" + accountType +
+                ", accountBalance=" + accountBalance +
                 ", amount=" + amount +
                 ", transactionDate=" + transactionDate +
                 '}';

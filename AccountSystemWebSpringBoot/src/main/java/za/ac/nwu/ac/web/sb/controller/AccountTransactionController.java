@@ -65,10 +65,15 @@ public class AccountTransactionController {
                     name = "mnemonic",
                     required = true)
             @RequestParam("mnemonic") final String mnemonic,
-            @ApiParam(value = "Request body to create a new AccountType.", required = true)
+            @ApiParam(value = "The ID that uniquely identifies the Member.",
+                    example = "1",
+                    name = "memberID",
+                    required = true)
+            @RequestParam("memberID") final Long memberID,
+            @ApiParam(value = "Request body to create a new AccountTransaction.", required = true)
             @RequestBody AccountTransactionDto accountTransaction) {
-        AccountTransactionDto accountTypeResponse = createAccountTransactionFlow.add(accountTransaction, mnemonic);
-        GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true, accountTypeResponse);
+        AccountTransactionDto accountTransactionResponse = createAccountTransactionFlow.add(accountTransaction, mnemonic, memberID);
+        GeneralResponse<AccountTransactionDto> response = new GeneralResponse<>(true, accountTransactionResponse);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 

@@ -14,6 +14,6 @@ public interface AccountTransactionRepository extends JpaRepository<AccountTrans
             "       at" +
             "   FROM " +
             "       AccountTransaction at" +
-            "   WHERE at.memberID = :memberID")
-    AccountTransactionDto getTransactionByMnemonic(Long memberID);
+            "  ")
+    AccountTransactionDto getTransactionByMnemonic(Long AccountTypeID);
 }

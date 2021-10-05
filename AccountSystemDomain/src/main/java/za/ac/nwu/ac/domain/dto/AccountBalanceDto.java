@@ -14,13 +14,15 @@ public class AccountBalanceDto implements Serializable {
 
     private static final long serialVersionUID = 5885539458265992212L;
 
+    private Long memberID;
     private String mnemonic;
     private Long balance;
 
     public AccountBalanceDto() {
     }
 
-    public AccountBalanceDto(String mnemonic, Long balance) {
+    public AccountBalanceDto(Long memberID, String mnemonic, Long balance) {
+        this.memberID = memberID;
         this.mnemonic = mnemonic;
         this.balance = balance;
     }
@@ -31,6 +33,21 @@ public class AccountBalanceDto implements Serializable {
     }
 
     @ApiModelProperty(position = 1,
+            value = "MemberID",
+            name = "MemberID",
+            notes = "Id of the member who owns the account",
+            dataType = "java.lang.Long",
+            example = "1",
+            required = true)
+    public Long getMemberID() {
+        return memberID;
+    }
+
+    public void setMemberID(Long memberID) {
+        this.memberID = memberID;
+    }
+
+    @ApiModelProperty(position = 2,
             value = "AccountType",
             name = "AccountType",
             notes = "Gets an accountType",
@@ -45,7 +62,7 @@ public class AccountBalanceDto implements Serializable {
         this.mnemonic = mnemonic;
     }
 
-    @ApiModelProperty(position = 2,
+    @ApiModelProperty(position = 3,
             value = "AccountBalance Balance",
             name = "Balance",
             notes = "The total amount of currency a member has in their account",
@@ -70,7 +87,7 @@ public class AccountBalanceDto implements Serializable {
 
     @JsonIgnore
     public AccountBalance getAccountBalance(AccountType accountType) {
-        return new AccountBalance(accountType, getBalance());
+        return new AccountBalance(getMemberID(), accountType, getBalance());
     }
 
     @Override
@@ -85,4 +102,5 @@ public class AccountBalanceDto implements Serializable {
                 ", balance=" + balance +
                 '}';
     }
+
 }

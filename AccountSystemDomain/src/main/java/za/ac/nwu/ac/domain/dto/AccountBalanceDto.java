@@ -28,6 +28,7 @@ public class AccountBalanceDto implements Serializable {
     }
 
     public AccountBalanceDto(AccountBalance accountBalance) {
+        this.setMemberID(accountBalance.getMemberID());
         this.setMnemonic(accountBalance.getAccountType().getMnemonic());
         this.setBalance(accountBalance.getBalance());
     }

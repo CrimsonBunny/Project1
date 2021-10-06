@@ -12,16 +12,19 @@ import za.ac.nwu.ac.domain.dto.AccountBalanceDto;
 import za.ac.nwu.ac.domain.dto.AccountTransactionDto;
 import za.ac.nwu.ac.domain.service.GeneralResponse;
 import za.ac.nwu.ac.logic.flow.CreateAccountBalanceFlow;
+import za.ac.nwu.ac.logic.flow.FetchAccountBalanceFlow;
 
 @RestController
 @RequestMapping("account-balance")
 public class AccountBalanceController {
 
     private final CreateAccountBalanceFlow createAccountBalanceFlow;
+    private final FetchAccountBalanceFlow fetchAccountBalanceFlow;
 
     @Autowired
-    public AccountBalanceController(CreateAccountBalanceFlow createAccountBalanceFlow) {
+    public AccountBalanceController(CreateAccountBalanceFlow createAccountBalanceFlow, FetchAccountBalanceFlow fetchAccountBalanceFlow) {
         this.createAccountBalanceFlow = createAccountBalanceFlow;
+        this.fetchAccountBalanceFlow = fetchAccountBalanceFlow;
     }
 
     @PostMapping("")
@@ -46,5 +49,31 @@ public class AccountBalanceController {
         AccountBalanceDto accountBalanceResponse = createAccountBalanceFlow.create(accountBalance, memberID, mnemonic);
         GeneralResponse<AccountBalanceDto> response = new GeneralResponse<>(true, accountBalanceResponse);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @GetMapping("{memberID}")
+    @ApiOperation(value = "Fetches the specified account balance.", notes = "Fetches the AccountBalance corresponding to the given member id and mnemonic.")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Goal found"),
+            @ApiResponse(code = 400, message = "Bad Request", response = GeneralResponse.class),
+            @ApiResponse(code = 404, message = "Resource not found", response = GeneralResponse.class),
+            @ApiResponse(code = 500, message = "Internal server error", response = GeneralResponse.class)
+    })
+    public ResponseEntity<GeneralResponse<AccountBalanceDto>> getBalance(
+            @ApiParam(value = "The id that uniquely identifies the member.",
+                    example = "1",
+                    name = "memberID",
+                    required = true)
+            @PathVariable("memberID") final Long memberID,
+
+            @ApiParam(value = "The mnemonic that uniquely identifies the AccountType.",
+                    example = "MILES",
+                    name = "mnemonic",
+                    required = true)
+            @RequestParam("mnemonic") final String mnemonic
+    ) {
+        AccountBalanceDto accountBalance = fetchAccountBalanceFlow.getAccountBalanceByMnemonic(memberID, mnemonic);
+        GeneralResponse<AccountBalanceDto> response = new GeneralResponse<>(true, accountBalance);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

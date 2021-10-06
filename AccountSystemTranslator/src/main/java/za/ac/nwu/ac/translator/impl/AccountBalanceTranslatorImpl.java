@@ -27,13 +27,13 @@ public class AccountBalanceTranslatorImpl implements AccountBalanceTranslator {
     }
 
     @Override
-    public AccountBalanceDto create(AccountBalanceDto accountBalanceDto, Long memberID, String mnemonic) {
+    public AccountBalanceDto create(AccountBalanceDto accountBalanceDto, String mnemonic) {
         try{
             AccountType accountType = accountTypeRepository.getAccountTypeByMnemonic(mnemonic);
             AccountBalance accountBalance = accountBalanceRepository.save(accountBalanceDto.getAccountBalance(accountType));
             return new AccountBalanceDto(accountBalance);
         } catch (Exception e) {
-            throw new RuntimeException("unable to save to the DB", e);
+            throw new RuntimeException("Unable to save to the DB", e);
         }
     }
 
@@ -41,7 +41,6 @@ public class AccountBalanceTranslatorImpl implements AccountBalanceTranslator {
     public AccountBalanceDto getAccountBalanceByMnemonic(Long memberID, String mnemonic) {
         try {
             AccountType accountType = accountTypeRepository.getAccountTypeByMnemonic(mnemonic);
-            Long accountTypeID = accountType.getAccountTypeID();
             AccountBalanceDto accountBalanceDto = accountBalanceRepository.getAccountBalanceDtoByMemberID(memberID, accountType);
             LOGGER.info("The input was {} and the output was {}", memberID, accountBalanceDto);
             return accountBalanceDto;

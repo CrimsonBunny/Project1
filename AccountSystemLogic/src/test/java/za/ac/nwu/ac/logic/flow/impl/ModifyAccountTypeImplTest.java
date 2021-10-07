@@ -10,48 +10,43 @@ import org.mockito.junit.MockitoJUnitRunner;
 import za.ac.nwu.ac.domain.dto.AccountTypeDto;
 import za.ac.nwu.ac.translator.AccountTypeTranslator;
 
-import java.util.List;
+import java.time.LocalDate;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class FetchAccountTypeImplTest {
-
-    private FetchAccountTypeImpl classToTest;
+public class ModifyAccountTypeImplTest {
 
     @Mock
     private AccountTypeTranslator translator;
 
     @InjectMocks
-    private FetchAccountTypeImpl flow;
+    private ModifyAccountTypeImpl flow;
 
     @Before
     public void setUp() throws Exception {
-        classToTest = new FetchAccountTypeImpl(null);
     }
 
     @After
     public void tearDown() throws Exception {
-        classToTest = null;
     }
 
     @Test
-    public void getAllAccountTypes() {
-        when(translator.getAllAccountTypes()).thenReturn(null);
-        List<AccountTypeDto> result = flow.getAllAccountTypes();
+    public void deleteAccountTypeByMnemonic() {
+        when(translator.delete("MILES")).thenReturn(null);
+        AccountTypeDto result = flow.deleteAccountTypeByMnemonic("MILES");
         assertNull(result);
-        verify(translator).getAllAccountTypes();
+        verify(translator).delete("MILES");
     }
 
     @Test
-    public void getAccountTypeByMnemonic() {
-        when(translator.getAccountTypeDtoByMnemonic("MILES")).thenReturn(null);
-        AccountTypeDto result = flow.getAccountTypeByMnemonic("MILES");
+    public void updateAccountType() {
+        when(translator.update("MILES", "Plays", LocalDate.now())).thenReturn(null);
+        AccountTypeDto result = flow.updateAccountType("MILES", "Plays", LocalDate.now());
         assertNull(result);
-        verify(translator).getAccountTypeDtoByMnemonic("MILES");
+        verify(translator).update("MILES", "Plays", LocalDate.now());
     }
 }

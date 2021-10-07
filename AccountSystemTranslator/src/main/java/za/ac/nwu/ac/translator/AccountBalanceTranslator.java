@@ -5,7 +5,7 @@ import za.ac.nwu.ac.domain.persistence.AccountType;
 
 public interface AccountBalanceTranslator {
 
-    AccountBalanceDto create(AccountBalanceDto accountBalanceDto, String mnemonic);
+    AccountBalanceDto create(AccountBalanceDto accountBalanceDto);
 
     AccountBalanceDto getAccountBalanceByMnemonic(Long memberID, String mnemonic);
 }

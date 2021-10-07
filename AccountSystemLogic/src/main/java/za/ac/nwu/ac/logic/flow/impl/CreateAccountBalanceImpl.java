@@ -19,6 +19,6 @@ public class CreateAccountBalanceImpl implements CreateAccountBalanceFlow {
 
     @Override
     public AccountBalanceDto create(AccountBalanceDto accountBalance) {
-        return accountBalanceTranslator.create(accountBalance, accountBalance.getMnemonic());
+        return accountBalanceTranslator.create(accountBalance);
     }
 }

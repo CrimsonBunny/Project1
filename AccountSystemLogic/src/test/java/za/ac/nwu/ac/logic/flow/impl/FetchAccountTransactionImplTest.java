@@ -7,41 +7,37 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import za.ac.nwu.ac.domain.dto.AccountTypeDto;
-import za.ac.nwu.ac.translator.AccountTypeTranslator;
+import za.ac.nwu.ac.domain.dto.AccountTransactionDto;
+import za.ac.nwu.ac.translator.AccountTransactionTranslator;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
 @RunWith(MockitoJUnitRunner.class)
-public class CreateAccountTypeImplTest {
+public class FetchAccountTransactionImplTest {
 
     @Mock
-    private AccountTypeTranslator translator;
+    private AccountTransactionTranslator translator;
 
     @InjectMocks
-    private CreateAccountTypeImpl flow;
+    private FetchAccountTransactionImpl flow;
 
     @Before
     public void setUp() throws Exception {
-        //hard way
-//        translator = Mockito.mock(AccountTypeTranslator.class);
-//        flow = new CreateAccountTypeImpl(translator);
     }
 
     @After
     public void tearDown() throws Exception {
-
     }
 
     @Test
-    public void create() {
-        when(translator.create(any(AccountTypeDto.class))).thenReturn(null);
-        AccountTypeDto result = flow.create(new AccountTypeDto());
+    public void getBalanceByMnemonic() {
+        when(translator.getBalanceByMnemonic(1L, "MILES")).thenReturn(null);
+        AccountTransactionDto result = flow.getBalanceByMnemonic(1L, "MILES");
         assertNull(result);
-        verify(translator).create(any(AccountTypeDto.class));
+        verify(translator).getBalanceByMnemonic(1L, "MILES");
     }
 }

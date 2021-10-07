@@ -27,9 +27,9 @@ public class AccountBalanceTranslatorImpl implements AccountBalanceTranslator {
     }
 
     @Override
-    public AccountBalanceDto create(AccountBalanceDto accountBalanceDto, String mnemonic) {
+    public AccountBalanceDto create(AccountBalanceDto accountBalanceDto) {
         try{
-            AccountType accountType = accountTypeRepository.getAccountTypeByMnemonic(mnemonic);
+            AccountType accountType = accountTypeRepository.getAccountTypeByMnemonic(accountBalanceDto.getMnemonic());
             AccountBalance accountBalance = accountBalanceRepository.save(accountBalanceDto.getAccountBalance(accountType));
             return new AccountBalanceDto(accountBalance);
         } catch (Exception e) {

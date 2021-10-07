@@ -75,7 +75,7 @@ public class AccountType implements Serializable {
         this.creationDate = creationDate;
     }
 
-    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType", cascade = CascadeType.PERSIST)
     public Set<AccountTransaction> getAccountTransactions() {
         return accountTransactions;
     }
@@ -84,7 +84,7 @@ public class AccountType implements Serializable {
         this.accountTransactions = accountTransactions;
     }
 
-    @OneToMany(targetEntity = AccountBalance.class, fetch = FetchType.LAZY, mappedBy = "accountType", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = AccountBalance.class, fetch = FetchType.LAZY, mappedBy = "accountType", cascade = CascadeType.PERSIST)
     public Set<AccountBalance> getAccountBalances() {
         return accountBalances;
     }

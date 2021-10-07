@@ -33,7 +33,7 @@ public class AccountTransactionTranslatorImpl implements AccountTransactionTrans
             AccountType accountType = accountTypeRepository.getAccountTypeByMnemonic(mnemonic);
 
             accountBalanceRepository.addAccountBalance(memberID, accountType, amount);
-            AccountBalance accountBalance = accountBalanceRepository.getAccountBalanceByMemberID(memberID);
+            AccountBalance accountBalance = accountBalanceRepository.getAccountBalanceByMemberID(memberID, accountType);
 
             AccountTransaction transaction = new AccountTransaction(accountType, accountBalance, amount, transactionDate);
             AccountTransactionDto accountTransactionDto = new AccountTransactionDto(transaction);
@@ -42,15 +42,6 @@ public class AccountTransactionTranslatorImpl implements AccountTransactionTrans
             return new AccountTransactionDto(accountTransaction);
         } catch (Exception e) {
             throw new RuntimeException("unable to save to the DB", e);
-        }
-    }
-
-    @Override
-    public AccountTransactionDto getBalanceByMnemonic(Long memberID, String mnemonic) {
-        try {
-            return accountTransactionRepository.getTransactionByMnemonic(memberID);
-        } catch (Exception e) {
-            throw new RuntimeException("Unable to read from the DB", e);
         }
     }
 }

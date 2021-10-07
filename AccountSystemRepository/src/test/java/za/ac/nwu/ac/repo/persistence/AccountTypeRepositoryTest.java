@@ -12,6 +12,8 @@ import za.ac.nwu.ac.domain.dto.AccountTypeDto;
 import za.ac.nwu.ac.domain.persistence.AccountType;
 import za.ac.nwu.ac.repo.config.RepositoryTestConfig;
 
+import java.time.LocalDate;
+
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
@@ -28,6 +30,26 @@ public class AccountTypeRepositoryTest {
 
     @After
     public void tearDown() throws Exception {
+    }
+
+    @Test
+    public void getAccountTypeByMnemonicMiles() {
+        AccountType miles = accountTypeRepository.getAccountTypeByMnemonic("MILES");
+        assertNotNull(miles);
+        assertEquals("MILES", miles.getMnemonic());
+    }
+
+    @Test
+    public void getAccountTypeByMnemonicPlay() {
+        AccountType miles = accountTypeRepository.getAccountTypeByMnemonic("PLAY");
+        assertNotNull(miles);
+        assertEquals("PLAY", miles.getMnemonic());
+    }
+
+    @Test
+    public void getAccountTypeByMnemonic() {
+        AccountType miles = accountTypeRepository.getAccountTypeByMnemonic("R");
+        assertNull(miles);
     }
 
     @Test
@@ -51,6 +73,19 @@ public class AccountTypeRepositoryTest {
     }
 
     @Test
-    public void deleteAccountTypeDtoByMnemonic() {
+    public void updateAccountTypeDtoByMnemonic() {
+        accountTypeRepository.updateAccountTypeDtoByMnemonic("MILES", "Plays", LocalDate.now());
+        AccountTypeDto accountTypeDto = accountTypeRepository.getAccountTypeDtoByMnemonic("MILES");
+        assertEquals("Plays", accountTypeDto.getAccountTypeName());
+        assertEquals(LocalDate.now(), accountTypeDto.getCreationDate());
     }
+
+    @Test
+    public void deleteAccountTypeDtoByMnemonic() {
+        accountTypeRepository.deleteAccountTypeDtoByMnemonic("PLAYS");
+        AccountTypeDto accountTypeDto = accountTypeRepository.getAccountTypeDtoByMnemonic("PLAYS");
+        assertNull(accountTypeDto);
+    }
+
+
 }

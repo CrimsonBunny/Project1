@@ -15,8 +15,8 @@ public interface AccountBalanceRepository extends JpaRepository<AccountBalance, 
             "       at" +
             "   FROM " +
             "       AccountBalance at" +
-            "   WHERE at.memberID = :memberID ")
-    AccountBalance getAccountBalanceByMemberID(Long memberID);
+            "   WHERE at.memberID = :memberID AND at.accountType = :accountType")
+    AccountBalance getAccountBalanceByMemberID(Long memberID, AccountType accountType);
 
     @Query(value = "SELECT " +
             "       at" +

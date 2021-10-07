@@ -9,6 +9,4 @@ import java.time.LocalDate;
 public interface AccountTransactionTranslator {
 
     AccountTransactionDto create(String mnemonic, Long memberID, Long amount, LocalDate transactionDate);
-
-    AccountTransactionDto getBalanceByMnemonic(Long memberID, String mnemonic);
 }

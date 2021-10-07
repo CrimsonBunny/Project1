@@ -47,7 +47,7 @@ public class AccountTransaction implements Serializable {
         this.Transaction_ID = accountID;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "AccountTypeID")
     public AccountType getAccountType() {
         return accountType;
@@ -57,7 +57,7 @@ public class AccountTransaction implements Serializable {
         this.accountType = accountType;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "BalanceID")
     public AccountBalance getAccountBalance() {
         return accountBalance;

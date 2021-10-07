@@ -67,8 +67,11 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
 
     @Override
     public AccountTypeDto update(String mnemonic, String newAccountName, LocalDate newCreationDate) {
-        return null;
+        try {
+            accountTypeRepository.updateAccountTypeDtoByMnemonic(mnemonic, newAccountName, newCreationDate);
+            return getAccountTypeDtoByMnemonic(mnemonic);
+        } catch (Exception e) {
+            throw new RuntimeException("Unable to execute update query", e);
+        }
     }
-
-
 }

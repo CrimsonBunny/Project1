@@ -113,9 +113,10 @@ public class AccountTypeController {
             @PathVariable("mnemonic") final String mnemonic,
 
             @ApiParam(value = "The new AccountTypeName that the specified AccountType should be updated with.",
-                    name = "new AccountTypeName",
+                    example = "Plays",
+                    name = "newAccountTypeName",
                     required = true)
-            @RequestParam("newAccountTypeName") final String newAccountName,
+            @RequestParam(value = "newAccountTypeName", required = false) final String newAccountName,
 
             @ApiParam(value = "The optional new date with which to update the CreationDate in ISO date format (yyyy-MM-dd)\r\nIf empty/null it will not be updated.",
                     name = "newCreationDate")

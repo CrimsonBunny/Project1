@@ -14,26 +14,16 @@ public class CreateAccountTransactionImpl implements CreateAccountTransactionFlo
 
     private final AccountTransactionTranslator accountTransactionTranslator;
 
-<span class="nc" id="L17">    public CreateAccountTransactionImpl(AccountTransactionTranslator accountTransactionTranslator) {</span>
-<span class="nc" id="L18">        this.accountTransactionTranslator = accountTransactionTranslator;</span>
-<span class="nc" id="L19">    }</span>
+<span class="fc" id="L17">    public CreateAccountTransactionImpl(AccountTransactionTranslator accountTransactionTranslator) {</span>
+<span class="fc" id="L18">        this.accountTransactionTranslator = accountTransactionTranslator;</span>
+<span class="fc" id="L19">    }</span>
 
     @Override
-    public AccountTransactionDto add(AccountTransactionDto accountTransaction) {
-<span class="nc bnc" id="L23" title="All 2 branches missed.">        if (null == accountTransaction.getTransactionDate()) {</span>
-<span class="nc" id="L24">            accountTransaction.setTransactionDate(LocalDate.now());</span>
+    public AccountTransactionDto create(String mnemonic, Long memberID, Long amount, LocalDate transactionDate) {
+<span class="pc bpc" id="L23" title="1 of 2 branches missed.">        if (null == transactionDate) {</span>
+<span class="nc" id="L24">            transactionDate = LocalDate.now();</span>
         }
-
-<span class="nc" id="L27">        return accountTransactionTranslator.create(accountTransaction);</span>
-    }
-
-    @Override
-    public AccountTransactionDto subtract(AccountTransactionDto accountTransaction) {
-<span class="nc bnc" id="L32" title="All 2 branches missed.">        if (null == accountTransaction.getTransactionDate()) {</span>
-<span class="nc" id="L33">            accountTransaction.setTransactionDate(LocalDate.now());</span>
-        }
-
-<span class="nc" id="L36">        return accountTransactionTranslator.create(accountTransaction);</span>
+<span class="fc" id="L26">        return accountTransactionTranslator.create(mnemonic, memberID, amount, transactionDate);</span>
     }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -13,18 +13,21 @@ import java.time.LocalDate;
 public class ModifyAccountTypeImpl implements ModifyAccountTypeFlow {
     private final AccountTypeTranslator accountTypeTranslator;
 
-<span class="nc" id="L16">    public ModifyAccountTypeImpl(AccountTypeTranslator accountTypeTranslator) {</span>
-<span class="nc" id="L17">        this.accountTypeTranslator = accountTypeTranslator;</span>
-<span class="nc" id="L18">    }</span>
+<span class="fc" id="L16">    public ModifyAccountTypeImpl(AccountTypeTranslator accountTypeTranslator) {</span>
+<span class="fc" id="L17">        this.accountTypeTranslator = accountTypeTranslator;</span>
+<span class="fc" id="L18">    }</span>
 
     @Override
     public AccountTypeDto deleteAccountTypeByMnemonic(String mnemonic) {
-<span class="nc" id="L22">        return accountTypeTranslator.delete(mnemonic);</span>
+<span class="fc" id="L22">        return accountTypeTranslator.delete(mnemonic);</span>
     }
 
     @Override
     public AccountTypeDto updateAccountType(String mnemonic, String newAccountName, LocalDate newCreationDate) {
-<span class="nc" id="L27">        return accountTypeTranslator.update(mnemonic, newAccountName, newCreationDate);</span>
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">        if(null == newCreationDate) {</span>
+<span class="nc" id="L28">            newCreationDate = LocalDate.now();</span>
+        }
+<span class="fc" id="L30">        return accountTypeTranslator.update(mnemonic, newAccountName, newCreationDate);</span>
     }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

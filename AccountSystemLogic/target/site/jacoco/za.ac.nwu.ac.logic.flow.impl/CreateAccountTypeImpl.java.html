@@ -14,30 +14,30 @@ import java.time.LocalDate;
 @Component(&quot;createAccountTypeFlowName&quot;)
 public class CreateAccountTypeImpl implements CreateAccountTypeFlow {
 
-<span class="nc" id="L17">    private static final Logger LOGGER = LoggerFactory.getLogger(CreateAccountTypeImpl.class);</span>
+<span class="fc" id="L17">    private static final Logger LOGGER = LoggerFactory.getLogger(CreateAccountTypeImpl.class);</span>
 
     private final AccountTypeTranslator accountTypeTranslator;
 
-<span class="nc" id="L21">    public CreateAccountTypeImpl(AccountTypeTranslator accountTypeTranslator) {</span>
-<span class="nc" id="L22">        this.accountTypeTranslator = accountTypeTranslator;</span>
-<span class="nc" id="L23">    }</span>
+<span class="fc" id="L21">    public CreateAccountTypeImpl(AccountTypeTranslator accountTypeTranslator) {</span>
+<span class="fc" id="L22">        this.accountTypeTranslator = accountTypeTranslator;</span>
+<span class="fc" id="L23">    }</span>
 
     @Override
     public AccountTypeDto create(AccountTypeDto accountType) {
-<span class="nc bnc" id="L27" title="All 2 branches missed.">        if(LOGGER.isInfoEnabled()) {</span>
-<span class="nc" id="L28">            String outputForLogging = &quot;null&quot;;</span>
-<span class="nc bnc" id="L29" title="All 4 branches missed.">            if((null != accountType) &amp;&amp; (null != accountType.getCreationDate())) {</span>
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">        if(LOGGER.isInfoEnabled()) {</span>
+<span class="fc" id="L28">            String outputForLogging = &quot;null&quot;;</span>
+<span class="pc bpc" id="L29" title="2 of 4 branches missed.">            if((null != accountType) &amp;&amp; (null != accountType.getCreationDate())) {</span>
 <span class="nc" id="L30">                outputForLogging = accountType.getCreationDate().toString();</span>
             }
-<span class="nc" id="L32">            LOGGER.info(&quot;The input object was {} and the creation date is {}&quot;, accountType, outputForLogging);</span>
+<span class="fc" id="L32">            LOGGER.info(&quot;The input object was {} and the creation date is {}&quot;, accountType, outputForLogging);</span>
         }
 
-<span class="nc bnc" id="L35" title="All 2 branches missed.">        if (null == accountType.getCreationDate()) {</span>
-<span class="nc" id="L36">            accountType.setCreationDate(LocalDate.now());</span>
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">        if (null == accountType.getCreationDate()) {</span>
+<span class="fc" id="L36">            accountType.setCreationDate(LocalDate.now());</span>
         }
-<span class="nc" id="L38">        AccountTypeDto result = accountTypeTranslator.create(accountType);</span>
-<span class="nc" id="L39">        LOGGER.info(&quot;The return object is {}&quot;, result);</span>
-<span class="nc" id="L40">        return result;</span>
+<span class="fc" id="L38">        AccountTypeDto result = accountTypeTranslator.create(accountType);</span>
+<span class="fc" id="L39">        LOGGER.info(&quot;The return object is {}&quot;, result);</span>
+<span class="fc" id="L40">        return result;</span>
     }
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

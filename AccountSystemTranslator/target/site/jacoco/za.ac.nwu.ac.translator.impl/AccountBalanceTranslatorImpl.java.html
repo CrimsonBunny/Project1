@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AccountBalanceTranslatorImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">AccountSystemTranslator</a> &gt; <a href="index.source.html" class="el_package">za.ac.nwu.ac.translator.impl</a> &gt; <span class="el_source">AccountBalanceTranslatorImpl.java</span></div><h1>AccountBalanceTranslatorImpl.java</h1><pre class="source lang-java linenums">package za.ac.nwu.ac.translator.impl;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import za.ac.nwu.ac.domain.dto.AccountBalanceDto;
+import za.ac.nwu.ac.domain.persistence.AccountBalance;
+import za.ac.nwu.ac.domain.persistence.AccountType;
+import za.ac.nwu.ac.repo.persistence.AccountBalanceRepository;
+import za.ac.nwu.ac.repo.persistence.AccountTypeRepository;
+import za.ac.nwu.ac.translator.AccountBalanceTranslator;
+
+
+@Component
+public class AccountBalanceTranslatorImpl implements AccountBalanceTranslator {
+
+<span class="fc" id="L18">    private static final Logger LOGGER = LoggerFactory.getLogger(AccountBalanceTranslatorImpl.class);</span>
+
+    private final AccountBalanceRepository accountBalanceRepository;
+    private final AccountTypeRepository accountTypeRepository;
+
+    @Autowired
+<span class="fc" id="L24">    public AccountBalanceTranslatorImpl(AccountBalanceRepository accountBalanceRepository, AccountTypeRepository accountTypeRepository) {</span>
+<span class="fc" id="L25">        this.accountBalanceRepository = accountBalanceRepository;</span>
+<span class="fc" id="L26">        this.accountTypeRepository = accountTypeRepository;</span>
+<span class="fc" id="L27">    }</span>
+
+    @Override
+    public AccountBalanceDto create(AccountBalanceDto accountBalanceDto) {
+        try{
+<span class="nc" id="L32">            AccountType accountType = accountTypeRepository.getAccountTypeByMnemonic(accountBalanceDto.getMnemonic());</span>
+<span class="nc" id="L33">            AccountBalance accountBalance = accountBalanceRepository.save(accountBalanceDto.getAccountBalance(accountType));</span>
+<span class="nc" id="L34">            return new AccountBalanceDto(accountBalance);</span>
+<span class="nc" id="L35">        } catch (Exception e) {</span>
+<span class="nc" id="L36">            throw new RuntimeException(&quot;Unable to save to the DB&quot;, e);</span>
+        }
+    }
+
+    @Override
+    public AccountBalanceDto getAccountBalanceByMnemonic(Long memberID, String mnemonic) {
+        try {
+<span class="fc" id="L43">            AccountType accountType = accountTypeRepository.getAccountTypeByMnemonic(mnemonic);</span>
+<span class="fc" id="L44">            AccountBalanceDto accountBalanceDto = accountBalanceRepository.getAccountBalanceDtoByMemberID(memberID, accountType);</span>
+<span class="fc" id="L45">            LOGGER.info(&quot;The input was {} and the output was {}&quot;, memberID, accountBalanceDto);</span>
+<span class="fc" id="L46">            return accountBalanceDto;</span>
+<span class="nc" id="L47">        } catch (Exception e) {</span>
+<span class="nc" id="L48">            throw new RuntimeException(&quot;Unable to read from the DB&quot;, e);</span>
+        }
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
